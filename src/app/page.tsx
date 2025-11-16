@@ -2,6 +2,8 @@
 import { ConnectButton } from "@/components/ConnectButton";
 import { SigMenu } from "@/components/SigConstructors/SigMenu";
 import Image from "next/image";
+import { Suspense } from "react";
+import { SimpleGovernanceDemo } from "@/components/governance/SimpleGovernanceDemo";
 
 export default function Home() {
   return (
@@ -108,6 +110,27 @@ export default function Home() {
       
       <br />
       <SigMenu />
+      
+      <div style={{ maxWidth: 1200, width: "90vw", margin: "24px auto" }}>
+        <div
+          style={{
+            background: "#ffffff",
+            borderRadius: 16,
+            border: "1px solid rgba(0,0,0,0.06)",
+            boxShadow: "0 2px 12px 0 rgba(0,0,0,0.04)"
+          }}
+        >
+          <div style={{ borderBottom: "1px solid rgba(0,0,0,0.06)", padding: "14px 18px" }}>
+            <h2 style={{ fontSize: 16, fontWeight: 600 }}>Simple Governance Demo</h2>
+            <p style={{ fontSize: 12, color: "#1f2937", marginTop: 6 }}>Minimal example that routes fees via P2P Swap under the hood.</p>
+          </div>
+          <div style={{ padding: "18px" }}>
+            <Suspense fallback={<div style={{ fontSize: 13, color: "#6b7280" }}>Loading form...</div>}>
+              <SimpleGovernanceDemo />
+            </Suspense>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

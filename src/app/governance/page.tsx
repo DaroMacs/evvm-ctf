@@ -116,7 +116,7 @@ export default function GovernancePage() {
           </div>
           <div style={{ padding: '18px' }}>
             <Suspense fallback={<div style={{ fontSize: 13, color: '#6b7280' }}>Loading form...</div>}>
-              <CreateProposalForm onCreated={() => {}} />
+              <CreateProposalForm />
             </Suspense>
           </div>
         </div>

@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, FormEvent } from 'react'
+import { useAccount } from 'wagmi'
+import { modal } from '@/context'
 import { useGovernanceService } from '../../hooks/useGovernanceService'
 
 export interface CreateProposalFormProps {
@@ -9,6 +11,7 @@ export interface CreateProposalFormProps {
 
 export function CreateProposalForm(props: CreateProposalFormProps) {
   const { createProposal, isLoading } = useGovernanceService()
+  const { address, isConnected } = useAccount()
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [start, setStart] = useState<string>('')
@@ -16,6 +19,10 @@ export function CreateProposalForm(props: CreateProposalFormProps) {
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault()
+    if (!isConnected || !address) {
+      modal.open()
+      return
+    }
     try {
       const startDate = new Date(start)
       const endDate = new Date(end)
